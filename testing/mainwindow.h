@@ -18,6 +18,8 @@ public:
 private slots:
     void on_ping_clicked();
 
+    void on_ping_2_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
