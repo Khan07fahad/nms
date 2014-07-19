@@ -6,9 +6,46 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>853</width>
-    <height>471</height>
+    <width>998</width>
+    <height>709</height>
    </rect>
+  </property>
+  <property name="palette">
+   <palette>
+    <active>
+     <colorrole role="ButtonText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>38</green>
+        <blue>85</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </active>
+    <inactive>
+     <colorrole role="ButtonText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>0</red>
+        <green>38</green>
+        <blue>85</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </inactive>
+    <disabled>
+     <colorrole role="ButtonText">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>153</red>
+        <green>153</green>
+        <blue>153</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </disabled>
+   </palette>
   </property>
   <property name="windowTitle">
    <string>Axiom Network System</string>
@@ -101,8 +138,7 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">
-s</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>SCAN</string>
@@ -125,6 +161,35 @@ s</string>
      </property>
      <property name="text">
       <string>FROM</string>
+     </property>
+    </widget>
+    <widget class="QTextBrowser" name="display">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>130</y>
+       <width>41</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>140</y>
+       <width>67</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>NO OF IP</string>
      </property>
     </widget>
    </widget>
@@ -266,10 +331,10 @@ s</string>
    <widget class="QTextBrowser" name="ot">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>90</y>
-      <width>441</width>
-      <height>331</height>
+      <x>600</x>
+      <y>40</y>
+      <width>191</width>
+      <height>61</height>
      </rect>
     </property>
    </widget>
@@ -283,13 +348,44 @@ s</string>
      </rect>
     </property>
    </widget>
+   <widget class="QTextBrowser" name="ot3">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>40</y>
+      <width>201</width>
+      <height>61</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="ot4">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>110</y>
+      <width>401</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>150</y>
+      <width>571</width>
+      <height>331</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayoutSummary"/>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>853</width>
+     <width>998</width>
      <height>25</height>
     </rect>
    </property>

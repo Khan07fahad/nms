@@ -1,9 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QProcess>
-#include <QPalette>
-#include <QFile>
-#include <QDataStream>
 
 
 
@@ -11,8 +8,22 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
-{
+{   qint32 k=1;
     ui->setupUi(this);
+    ui->gridLayoutSummary->setHorizontalSpacing(0);
+    ui->gridLayoutSummary->setSpacing(0);
+    ui->gridLayoutSummary->setVerticalSpacing(0);
+    for(int i=0; i<16; i++) {
+        for(int j=0; j<16; j++) {
+
+            machine[i][j] = new QPushButton(QString::number(k++));
+            ui->gridLayoutSummary->addWidget(machine[i][j], i, j);
+        }
+    }
+    machine[5][5]->setAutoFillBackground(true);
+    machine[5][5]->setStyleSheet("background-color:red");
+
+
 
 }
 
@@ -54,32 +65,62 @@ void MainWindow::on_ping_clicked()
 
 void MainWindow::on_ping_2_clicked()
 {
-    QProcess ps,ps1;
+    /*********************************************************************
+     * splitting the range of ip address.
+     *********************************************************************/
+    QProcess ps;
     QString r1=ui->ip1->toPlainText();
                          QString p1=ui->ip2->toPlainText();
                          QRegExp rx("(\\.)");
                          QStringList qy = p1.split(rx);
     QString r2=qy.at(3).toLocal8Bit().constData();
-    QString nmap("nmap -sP "+r1+"-" +r2+"|grep -o '[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}'");
-    ui->ot2->setText(nmap);
+    QString nmap("/bin/sh -c \"nmap -sP "+r1+"-" +r2+"|grep -o '[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}'\"");
+    //ui->ot2->setText(nmap);
     ps.start(nmap);
     ps.waitForFinished();
     QString result2=ps.readAllStandardOutput();
-   // result2.split()
- /*   QFile file("input.txt");
-    file.open(QIODevice::ReadWrite);
-    QDataStream out(&file);
-    out << QString(result2);*/
+    ui->ot->setText(result2);
 
-   /* QString qs("grep '[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}' input.txt");
-    ps1.start(qs);
-    ps1.waitForFinished();
-    QString res=ps1.readAllStandardOutput();
-    ui->ot->setText(res);
-   // ui->ot2->setText("unsucess");
-*/
+    /**********************************************
+     * calculate no of ip's input by user.
+     **********************************************/
+     QRegExp rx1("(\\.)");
+     QStringList qy1=r1.split(rx1);
+     QString dif=qy1.at(3).toLocal8Bit().constData();
+     int sub2=r2.toInt();
+     int sub1=dif.toInt();
+     int diff=sub2-sub1+1;
+     QString sub = QString::number(diff);
+     ui->display->setText(sub);
 
-ui->ot->setText(result2);
+     /*******************************************************
+      * target ip to be scanned i.e, input ip's of user
+      *******************************************************/
+     QString nmap1("/bin/sh -c \"nmap -sLP "+r1+"-" +r2+"|grep -o '[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}\\.[0-9]\\{1,3\\}'\"");
+     //ui->ot2->setText(nmap);
+     ps.start(nmap1);
+     ps.waitForFinished();
+     QString total_ip=ps.readAllStandardOutput();
+     ui->ot3->setText(total_ip);
 
+    /********************************************************
+     * splitting indiviual ip addressess.
+     ********************************************************/
+     QRegExp rx2("(\\n)");
+     QStringList ia=result2.split(rx2);
+     QString one=ia.at(0).toLocal8Bit().constData();
+     ui->ot2->setText(one);
 
+    /************************************************************
+     * compare operation to check for connected and not connected
+     ***********************************************************
+     if(total_ip.contains(ia.at(1).toLocal8Bit().constData(),Qt::CaseInsensitive)==true)
+     {
+         ui->ot4->setText("connected");
+     }
+     else
+     {
+         ui->ot4->setText("unsuscess");
+     }
+    */
 }

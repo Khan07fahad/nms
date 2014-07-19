@@ -19,4 +19,4 @@ HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui
 QT += gui
-LIBS +=-lkdeui
+
